@@ -1,0 +1,19 @@
+redux 
+    - redux is a state management library.
+
+1)actions
+2) action creators
+They are js functions which returns plain javascript object which contains type and payload.
+
+
+3) dispatch
+     it will dispatch the plain object which returns by the action creators to the reducer.
+    
+4)reducer 
+    it is used to update the state based on the action type.
+
+5) central store
+    where all the data will store
+
+
+Action Types: ADD_TO_CART
