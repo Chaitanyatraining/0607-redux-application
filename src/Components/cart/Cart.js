@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
+import { removeFromCart } from '../product-actions/ProductActions'
+import {useDispatch} from 'react-redux';
 
 function Cart() {
-    const [total,setTotal] = useState(0);
+    const dispatch = useDispatch();
+
     // we have a hook to access the redux store - useSelector
     const cartData = useSelector((state) => state.productsData.cartData)
     // console.log(redux_state)
+    //map,reduce,filter
+    //foreach and map
+    const totalPrice = cartData.reduce((prevsValue,currentValue)=>{
+        return prevsValue + currentValue.price
+    },0)
+
   return (
     <div>
         <h2>Cart</h2>
         <div className='product_cart'>
-            <p>Total Price: {total}</p>
+           {cartData && cartData.length &&  <p>Total Price: {totalPrice}</p>}
+
             <div>
                 {
                   cartData && cartData.length?(
@@ -35,7 +45,9 @@ function Cart() {
                             <div className='pt-2'>
                                 <p>Price:{product.price}</p>
                             </div>
-                            <button className='btn btn-danger'>Remove</button>
+                            <button className='btn btn-danger'
+                            onClick={()=>{dispatch(removeFromCart(product.id))}}
+                            >Remove</button>
                             </div>
                         </div>
                     ))

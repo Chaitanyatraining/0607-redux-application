@@ -7,6 +7,7 @@ function Product() {
     const  {id}  = useParams();
     const [product,setproduct] = useState({});
     const dispatch = useDispatch();
+    const [isProductAdded,setIsProductAdded] = useState(false);
 
     const getProductData = async ()=>{
         // console.log(id)
@@ -43,7 +44,13 @@ function Product() {
                   <p className=' text-center'>{product.description}</p>
                 </div>
                 <div>
-                <button className='btn btn-primary' onClick={()=>{dispatch(addToCart(product))}}>Add to cart</button>
+                <button className='btn btn-primary'
+                 onClick={()=>{
+                  dispatch(addToCart(product))
+                  setIsProductAdded(true);
+                }
+                }
+                 >{isProductAdded? "Added" : "Add to cart"}</button>
                 </div>
                 </div>
               </div>
